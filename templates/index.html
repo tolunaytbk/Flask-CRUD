@@ -1,0 +1,407 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3" >
+
+                <h2 align="center"><b>Kooperatif Veri Seti</b></h2>
+
+                <button type="button " class="btn btn-success float-left" data-bs-toggle="modal" data-bs-target="#mymodal">
+                        Veri Ekle
+                </button>
+                <div class="modal fade" id="mymodal" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Veri Ekle</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form action="{{url_for('insert')}}" method="POST">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Date"><h6><b>Tarih:</b></h6></label>
+                                                    <input type="date"
+                                                           class="form-control"
+                                                           id="Date"
+                                                           name="Date"
+                                                           value="{{today}}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Location"><h6><b>Yer:</b></h6></label>
+                                                    <select class="form-control"
+                                                            type="text"
+                                                            id="Location"
+                                                            name="Location"
+                                                            data-live-search="true">
+                                                        {% for loc in location %}
+                                                        <option>{{ loc }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Fish"><h6><b>Balık Adı:</b></h6></label>
+                                                    <select class="form-control"
+                                                            type="text"
+                                                            id="Fish"
+                                                            name="Fish"
+                                                            data-live-search="true">
+                                                        {% for fish in species %}
+                                                        <option>{{ fish }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Weight"><h6><b>Balık Miktarı:</b></h6></label>
+                                                    <input type="number"
+                                                           step="0.01"
+                                                           class="form-control"
+                                                           id="Weight"
+                                                           name="Weight"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Price"><h6><b>Fiyat:</b></h6></label>
+                                                    <input type="number"
+                                                           step="0.1"
+                                                           class="form-control"
+                                                           id="Price"
+                                                           name="Price"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Boat"><h6><b>Çıkan T.S.:</b></h6></label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           id="Boat"
+                                                           name="Boat"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Boat_fishnet"><h6><b>Ağ A.T.S:</b></h6></label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           id="Boat_fishnet"
+                                                           name="Boat_fishnet"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Cycle"><h6><b>Posta:</b></h6></label>
+                                                    <input type="number" class="form-control"
+                                                           id="Cycle"
+                                                           name="Cycle"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Boat_paragat"><h6><b>Paragat A.T.S:</b></h6></label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           id="Boat_paragat"
+                                                           name="Boat_paragat"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Boat_both_f_p"><h6><b>Ağ ve Paragat A.T.S:</b></h6></label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           id="Boat_both_f_p"
+                                                           name="Boat_both_f_p"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Fish_rod"><h6><b>Olta Sayısı:</b></h6></label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           id="Fish_rod"
+                                                           name="Fish_rod"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Project"><h6><b>Proje:</b></h6></label>
+                                                    <select class="form-control selectpicker"
+                                                            type="text"
+                                                            id="Project"
+                                                            name="Project"
+                                                            data-live-search="true">
+                                                        {% for proj in project %}
+                                                        <option>{{ proj }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </br>
+                                        <div class="row-md-6">
+                                           <button type="submit" class="btn btn-primary">Ekle</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive md-12 mr-auto">
+                    <table id="coopTable" class="display table table-striped table-hover table-dark md-12">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Lokasyon</th>
+                            <th scope="col">Balık Türü</th>
+                            <th scope="col">Miktar (kg)</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Tekne Sayısı</th>
+                            <th scope="col">Ağ A.T.S</th>
+                            <th scope="col">Posta Sayısı</th>
+                            <th scope="col">Paragat A.T.S</th>
+                            <th scope="col">Paragat ve Ağ A.T.S</th>
+                            <th scope="col">Olta Sayısı</th>
+                            <th scope="col">Proje</th>
+                            <th scope="col">Gelir</th>
+                            <th scope="col">İşlem</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for row in coops %}
+                        <tr>
+                            <td>{{ row.date.date() }}</td>
+                            <td>{{ row.location }}</td>
+                            <td>{{ row.fish }}</td>
+                            <td>{{ row.weight }}</td>
+                            <td>{{ row.price }}</td>
+                            <td>{{ row.boat }}</td>
+                            <td>{{ row.boat_fishnet }}</td>
+                            <td>{{ row.cycle }}</td>
+                            <td>{{ row.boat_paragat }}</td>
+                            <td>{{ row.boat_both_f_p }}</td>
+                            <td>{{ row.fish_rod }}</td>
+                            <td>{{ row.project }}</td>
+                            <td>{{ row.income }}</td>
+                            <td>
+                                <a href="/update/{{row.id}}"
+                                   class="btn btn-warning btn-xs"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modaledit{{row.id}}">Edit</a>
+                                <a href="/delete/{{row.id}}"
+                                   class="btn btn-xs btn-dark"
+                                   onclick="return confirm('Veri silinecektir')">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Düzenle</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <form action="{{url_for('update')}}" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="Date"><h6><b>Tarih:</b></h6></label>
+                                                            <input type="hidden"
+                                                                   name="id"
+                                                                   value="{{row.id}}"
+                                                            />
+                                                            <input type="date"
+                                                                   class="form-control"
+                                                                   id="editDate"
+                                                                   name="editDate"
+                                                                   value="{{row.date.date()}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editLocation"><h6><b>Yer:</b></h6></label>
+                                                            <select class="form-control"
+                                                                    type="text"
+                                                                    id="editLocation"
+                                                                    name="editLocation"
+                                                                    data-live-search="true">
+                                                                <option selected>{{row.location}}</option>
+                                                                {% for loc in location %}
+                                                                <option>{{ loc }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editFish"><h6><b>Balık Adı:</b></h6></label>
+                                                            <select class="form-control"
+                                                                    type="text"
+                                                                    id="editFish"
+                                                                    name="editFish"
+                                                                    data-live-search="true">
+                                                                <option selected>{{row.fish}}</option>
+                                                                {% for fish in species %}
+                                                                <option>{{ fish }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editWeight"><h6><b>Balık Miktarı:</b></h6></label>
+                                                            <input type="number"
+                                                                   step="0.01"
+                                                                   class="form-control"
+                                                                   id="editWeight"
+                                                                   name="editWeight"
+                                                                   value="{{row.weight}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editPrice"><h6><b>Fiyat:</b></h6></label>
+                                                            <input type="number"
+                                                                   step="0.1"
+                                                                   class="form-control"
+                                                                   id="editPrice"
+                                                                   name="editPrice"
+                                                                   value="{{row.price}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editBoat"><h6><b>Çıkan T.S.:</b></h6></label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   id="editBoat"
+                                                                   name="editBoat"
+                                                                   value="{{row.boat}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editBoat_fishnet"><h6><b>Ağ A.T.S:</b></h6></label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   id="editBoat_fishnet"
+                                                                   name="editBoat_fishnet"
+                                                                   value="{{row.boat_fishnet}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editCycle"><h6><b>Posta:</b></h6></label>
+                                                            <input type="number" class="form-control"
+                                                                   id="editCycle"
+                                                                   name="editCycle"
+                                                                   value="{{row.cycle}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editBoat_paragat"><h6><b>Paragat A.T.S:</b></h6></label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   id="editBoat_paragat"
+                                                                   name="editBoat_paragat"
+                                                                   value="{{row.boat_paragat}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editBoat_both_f_p"><h6><b>Ağ ve Paragat A.T.S:</b></h6></label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   id="editBoat_both_f_p"
+                                                                   name="editBoat_both_f_p"
+                                                                   value="{{row.boat_both_f_p}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editFish_rod"><h6><b>Olta Sayısı:</b></h6></label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   id="editFish_rod"
+                                                                   name="editFish_rod"
+                                                                   value="{{row.fish_rod}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="editProject"><h6><b>Proje:</b></h6></label>
+                                                            <select class="form-control selectpicker"
+                                                                    type="text"
+                                                                    id="editProject"
+                                                                    name="editProject"
+                                                                    data-live-search="true">
+                                                                <option selected>{{row.project}}</option>
+                                                                {% for proj in project %}
+                                                                <option>{{ proj }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </br>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary">Düzenle</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

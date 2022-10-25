@@ -1,0 +1,216 @@
+<div class="modal-body">
+    <form method="POST">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group col1">
+                    <label for="Day">Gün:</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Day"
+                           name="Day"
+                           value="5"
+                    />
+                  </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Month">Ay:</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Month"
+                           name="Month"
+                           value="10"
+                    />
+                  </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Year">Yıl:</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Year"
+                           name="Year"
+                           value="2022"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group col1">
+                    <label for="Location">Yer:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="Location"
+                           name="Location"
+                           value= "Gocek"
+                    />
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Fish">Balık Adı:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="Fish"
+                           name="Fish"
+                           value= "Akya"
+                    />
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Weight">Balık Miktarı</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Weight"
+                           name="Weight"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group col1">
+                      <label for="Price">Fiyat</label>
+                      <input type="number"
+                             class="form-control"
+                             id="Price"
+                             name="Price"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Boat">Çıkan Tekne Sayısı</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Boat"
+                           name="Boat"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Cycle">Posta</label>
+                    <input type="number" class="form-control"
+                           id="Cycle"
+                           name="Cycle"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group col1">
+                      <label for="Fishnet">Ağ Atan Tekne Sayısı</label>
+                      <input type="number"
+                             class="form-control"
+                             id="Fishnet"
+                             name="Fishnet"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Paragat">Paragat A.T.S</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Paragat"
+                           name="Paragat"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="coopParagat_birakma">Paragat ve Bırakma A.T.S</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Paragat_birakma"
+                           name="coopParagat_birakma"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group col1">
+                    <label for="Both_f_p">Hem Ağ Hem Paragat A.T.S</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Both_f_p"
+                           name="Both_f_p"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Fishrod">Olta Sayısı</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Fishrod"
+                           name="Fishrod"/>
+                </div>
+            </div>
+            <div class="col-md-1 ml-auto">
+                <div class="form-group col1">
+                    <label for="Paragat_birakma_n">Paragat/Bırakma Sayısı</label>
+                    <input type="number"
+                           class="form-control"
+                           id="Paragat_birakma_n"
+                           name="Paragat_birakma_n"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+{% message %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+changing_coop.day = editDay
+        changing_coop.month = editMonth
+        changing_coop.location = editLocation
+        changing_coop.fish = editFish
+        changing_coop.weight = editWeight
+        changing_coop.price = editPrice
+        changing_coop.boat = editBoat
+        changing_coop.cycle = editCycle
+        changing_coop.fishnet = editFishnet
+        changing_coop.paragat = editParagat
+        changing_coop.paragat_birakma = editParagat_birakma
+        changing_coop.both_f_p = editBoth_f_p
+        changing_coop.fishrod = editFishrod
+        changing_coop.coopParagat_birakma_n = editParagat_birakma_n
+
+
+editDay = request.form.get('editDay', type=int)
+editMonth = request.form.get('editMonth', type=int)
+editYear = request.form.get('editYear', type=int)
+editLocation = request.form.get('editLocation', type=str)
+editFish = request.form.get('editFish', type=str)
+editWeight = request.form.get('editWeight', type=int)
+editPrice = request.form.get('editPrice', type=int)
+editBoat = request.form.get('editBoat', type=int)
+editCycle = request.form.get('editCycle', type=int)
+editFishnet = request.form.get('editFishnet', type=int)
+editParagat = request.form.get('editParagat', type=int)
+editParagat_birakma = request.form.get('editParagat_birakma', type=int)
+editBoth_f_p = request.form.get('editBoth_f_p', type=int)
+editFishrod = request.form.get('editFishrod', type=int)
+editParagat_birakma_n = request.form.get('editParagat_birakma_n', type=int)
+
+
+updating = Coop(day=editDay, month=editMonth, year=editYear, location=editLocation,
+                        fish=editFish, weight=editWeight, price=editPrice, boat=editBoat,
+                        fishnet=editFishnet, cycle=editCycle, paragat=editParagat, paragat_birakma=editParagat_birakma,
+                        fish_rod=editFishrod, both_f_p=editBoth_f_p, coopParagat_birakma_n=editParagat_birakma_n)
+        db.session.add(updating)
+
+<a href="/update/{{row.id}}"
+   class="btn btn-warning btn-xs"
+   data-bs-toggle="modal"
+   data-bs-target="#modaledit{{row.id}}">Düzenle</a>
+<a href="/delete/{{row.id}}"
+   class="btn btn-danger btn-xs"
+   onclick="return confirm('Veri silinecektir')">Sil</a>
